@@ -19,10 +19,14 @@ function Input() {
 
   // SOUMISSION TACHE
   const handleClick = () => {
-    const newTaches = [...taches];
-    newTaches.push(values);
-    setTaches(newTaches);
-    setValues("");
+    if (values != "") {
+      const newTaches = [...taches];
+      newTaches.push(values);
+      setTaches(newTaches);
+      setValues("");
+    } else {
+      alert("Entrez une tache .");
+    }
   };
 
   // DELETE TACHE
@@ -47,8 +51,8 @@ function Input() {
       <div>
         <ul>
           {taches.length != 0 ? (
-            taches.map((list) => (
-              <li key={list}>
+            taches.map((list, index) => (
+              <li key={index}>
                 {list}
                 <button name={list} onClick={handleDelete}>
                   x
