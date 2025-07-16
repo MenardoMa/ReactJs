@@ -1,69 +1,18 @@
-import { Fragment, useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <>
-      <Input />
-    </>
-  );
-}
+  const [compteur, setCompteur] = useState(0);
 
-function Input() {
-  const [values, setValues] = useState("");
-  const [taches, setTaches] = useState([]);
+  useEffect(() => {
+    console.log("componentDidMount");
+  }, []);
 
-  // ADD TACHE
-  const handleChange = (e) => {
-    setValues(e.target.value);
-  };
-
-  // SOUMISSION TACHE
-  const handleClick = () => {
-    if (values != "") {
-      const newTaches = [...taches];
-      newTaches.push(values);
-      setTaches(newTaches);
-      setValues("");
-    } else {
-      alert("Entrez une tache .");
-    }
-  };
-
-  // DELETE TACHE
-  const handleDelete = (e) => {
-    e.preventDefault();
-    const nameTache = e.target.getAttribute("name");
-    const filter = taches.filter((tache) => tache != nameTache);
-    setTaches(filter);
-  };
+  console.log("render 0");
 
   return (
     <>
-      <div>
-        <input
-          type="text"
-          value={values}
-          onChange={handleChange}
-          placeholder="Entre la tache"
-        />
-        <button onClick={handleClick}>Entree</button>
-      </div>
-      <div>
-        <ul>
-          {taches.length != 0 ? (
-            taches.map((list, index) => (
-              <li key={index}>
-                {list}
-                <button name={list} onClick={handleDelete}>
-                  x
-                </button>
-              </li>
-            ))
-          ) : (
-            <p>Ajouter la tache.</p>
-          )}
-        </ul>
-      </div>
+      <h1>Le useEffect</h1>
+      <h1>{compteur}</h1>
     </>
   );
 }
