@@ -14,8 +14,8 @@ function useToggle(initial) {
 
 function useIncremet(initial) {
   const [count, setCount] = useState(initial);
-  const toggleIncrement = () => setCount(count + 1);
-  const toggleDesincrement = () => setCount(count - 1);
+  const toggleIncrement = () => setCount((v) => v + 1);
+  const toggleDesincrement = () => setCount((v) => v - 1);
   return [count, toggleIncrement, toggleDesincrement];
 }
 
@@ -35,8 +35,8 @@ function App() {
   return (
     <>
       <h1>{count}</h1>
-      <button onClick={toggleIncrement}>Increment</button>
-      <button onClick={toggleDesincrement}>Desincrement</button>
+      <button onClick={toggleIncrement}> + Increment</button>
+      <button onClick={toggleDesincrement}> - Desincrement</button>
     </>
   );
 }
