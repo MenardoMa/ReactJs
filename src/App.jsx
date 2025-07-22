@@ -1,30 +1,43 @@
-import { useRef, useEffect } from "react";
+import { useState } from "react";
 
 /**
  *
- * Le hoock useRef
- * Permet d'interargir avec le HTML et de conserver la valeur
+ * Le Hoock Personnalisé
  *
  */
 
-function App() {
-  const ref = useRef(undefined);
+function useToggle(initial) {
+  const [state, setState] = useState(initial);
+  const toggle = () => setState((v) => !v);
+  return [state, toggle];
+}
 
-  useEffect(() => {
-    console.log(ref.current);
-  }, []);
+function useIncremet(initial) {
+  const [count, setCount] = useState(initial);
+  const toggleIncrement = () => setCount(count + 1);
+  const toggleDesincrement = () => setCount(count - 1);
+  return [count, toggleIncrement, toggleDesincrement];
+}
+
+function App() {
+  // const [checked, toggleCheck] = useToggle();
+  // return (
+  //   <>
+  //     <label>
+  //       <input type="checkbox" checked={checked} onChange={toggleCheck} />
+  //       {checked && "Je suis coché"}
+  //     </label>
+  //   </>
+  // );
+
+  const [count, toggleIncrement, toggleDesincrement] = useIncremet(0);
 
   return (
     <>
-      <h1>Lorem ipsum dolor</h1>
-      <Input ref={ref} />
+      <h1>{count}</h1>
+      <button onClick={toggleIncrement}>Increment</button>
+      <button onClick={toggleDesincrement}>Desincrement</button>
     </>
   );
 }
-
-function Input({ ref }) {
-  console.log(ref);
-  return <input ref={ref} type="text" placeholder="votre champ" />;
-}
-
 export default App;
